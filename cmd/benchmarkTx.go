@@ -7,12 +7,8 @@ import (
 	"context"
 	"log"
 
-	"github.com/cosmos/cosmos-sdk/codec"
-	"github.com/cosmos/cosmos-sdk/codec/types"
 	txtypes "github.com/cosmos/cosmos-sdk/types/tx"
-	authtx "github.com/cosmos/cosmos-sdk/x/auth/tx"
 	"github.com/gobuffalo/packr/v2/file/resolver/encoding/hex"
-	"github.com/spf13/cast"
 	"github.com/spf13/cobra"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials/insecure"
@@ -29,46 +25,46 @@ Cobra is a CLI library for Go that empowers applications.
 This application is a tool to generate the needed files
 to quickly create a Cobra application.`,
 	Run: func(cmd *cobra.Command, args []string) {
-		numTx := cast.ToInt(cmd.Flag("NumTx").Value.String())
+		// numTx := cast.ToInt(cmd.Flag("NumTx").Value.String())
 		grpcConn, err := grpc.Dial(cmd.Flag("host").Value.String(), grpc.WithTransportCredentials(insecure.NewCredentials()))
 		if err != nil {
 			log.Fatal(err)
 		}
 		defer grpcConn.Close()
-		txClient := txtypes.NewServiceClient(grpcConn)
-		var config Config
-		config.GetConfig()
-		interfaceRegistry := types.NewInterfaceRegistry()
-		marshaler := codec.NewProtoCodec(interfaceRegistry)
-		txCfg := authtx.NewTxConfig(marshaler, authtx.DefaultSignModes)
+		// _ := txtypes.NewServiceClient(grpcConn)
+		// var config Config
+		// config.GetConfig()
+		// interfaceRegistry := types.NewInterfaceRegistry()
+		// marshaler := codec.NewProtoCodec(interfaceRegistry)
+		// _ := authtx.NewTxConfig(marshaler, authtx.DefaultSignModes)
 
-		for j, _ := range config.Seeds {
-			go func(j int) {
-				txChannel := make(chan []byte)
-				go TxChannelHandler(txClient, txChannel)
-				privKey := GetPrivKey(config.Seeds[j])
+		// for j, _ := range config.Seeds {
+		// 	go func(j int) {
+		// 		txChannel := make(chan []byte)
+		// 		go TxChannelHandler(txClient, txChannel)
+		// 		privKey := GetPrivKey(config.Seeds[j])
 
-				for i := 0; i < numTx; i++ {
-					txBuilder := NewBankSendTx(
-						txCfg,
-						privKey,
-						config.AccountNumbers[j],
-						config.Sequences[j]+uint64(i),
-						config.Denom,
-						config.ChainId,
-						config.Prefix,
-					)
-					txBytes, err := txCfg.TxEncoder()(txBuilder.GetTx())
-					if err != nil {
-						log.Fatal(err)
-					}
-					txChannel <- txBytes
-				}
-			}(j)
+		// 		for i := 0; i < numTx; i++ {
+		// 			txBuilder := NewBankSendTx(
+		// 				txCfg,
+		// 				privKey,
+		// 				config.From,
+		// 				config.To,
+		// 				config.Denom,
+		// 				config.ChainId,
+		// 				config.Prefix,
+		// 			)
+		// 			txBytes, err := txCfg.TxEncoder()(txBuilder.GetTx())
+		// 			if err != nil {
+		// 				log.Fatal(err)
+		// 			}
+		// 			txChannel <- txBytes
+		// 		}
+		// 	}(j)
 
-		}
-		for {
-		}
+		// }
+		// for {
+		// }
 	},
 }
 

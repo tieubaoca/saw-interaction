@@ -1,0 +1,38 @@
+{
+  "body": {
+    "messages": [
+      {
+        "@type": "/cosmos.bank.v1beta1.MsgSend",
+        "from_address": "saw1dtz5gcvngukdlk4npywha3pw2ahgyk47hld24k8t60r6r759ev7qnd993l",
+        "to_address": "saw1a0esqjdpam7m6j0vv3gp5qz68hd9gvrn4zam0n",
+        "amount": [{ "denom": "usae", "amount": "100" }]
+      }
+    ],
+    "memo": "",
+    "timeout_height": "999999999999",
+    "extension_options": [],
+    "non_critical_extension_options": []
+  },
+  "auth_info": {
+    "signer_infos": [
+      {
+        "public_key": {
+          "@type": "/cosmos.crypto.secp256k1.PubKey",
+          "key": "Aw6UyhRGSIHVyqty1SzFQnlP3q38b3OlExrsIs9kSMwD"
+        },
+        "mode_info": { "single": { "mode": "SIGN_MODE_DIRECT" } },
+        "sequence": "0"
+      }
+    ],
+    "fee": {
+      "amount": [{ "denom": "usae", "amount": "200" }],
+      "gas_limit": "200000",
+      "payer": "",
+      "granter": ""
+    },
+    "tip": null
+  },
+  "signatures": [
+    "fJZybnvFYzzCx8MhvtXQ4RND7PF6WCRoNHSCtC7kFFBboSMOr554MllplMWJWokymdnVBZYTSGnHn8dw4a38tA=="
+  ]
+}
